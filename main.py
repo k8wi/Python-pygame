@@ -16,9 +16,11 @@ pygame.display.set_icon(icon)
 spaceshipIMG=pygame.image.load('images/spaceship.png')
 spaceshipX=370
 spaceshipY=480
+Xchange=0
+Ychange=0
 
-def spaceship():
-  screen.blit(spaceshipIMG,(spaceshipX,spaceshipY))
+def spaceship(x,y):
+  screen.blit(spaceshipIMG,(x,y))
 
 # infinite loop for game
 running = True
@@ -27,7 +29,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    if event.type==pygame.KEYDOWN:
+        if event.key==pygame.K_LEFT:
+            print("LEFT arrow pressed")
+            Xchange=-0.3
+        if event.key==pygame.K_RIGHT:
+            print("RIGHT arrow pressed")
+            Xchange=0.3
+    if event.type == pygame.KEYUP:
+        if event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT:
+            print("Keystroke released")
+            Xchange=0
+
+
     screen.fill((128,128,128))
-    spaceship()
+    spaceshipX+=Xchange
+    spaceship(spaceshipX,spaceshipY)
     pygame.display.update()
 
