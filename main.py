@@ -51,8 +51,18 @@ while running:
 
 
     screen.fill((20,20,20))
-    spaceshipX+=Xchange
-    spaceshipY+=Ychange
+    if Xchange>0:
+        if spaceshipX<=735.7:
+           spaceshipX+=Xchange
+    if Xchange<0:
+        if spaceshipX>0:
+           spaceshipX+=Xchange
+    if Ychange>0:
+        if spaceshipY <=535.7:
+            spaceshipY += Ychange
+    if Ychange<0:
+        if spaceshipY >350:
+            spaceshipY += Ychange
     spaceship(spaceshipX,spaceshipY)
     pygame.display.update()
 
