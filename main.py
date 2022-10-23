@@ -19,8 +19,18 @@ spaceshipY=480
 Xchange=0
 Ychange=0
 
+#Aliens
+alienIMG=pygame.image.load('images/Alien.png')
+alienX=random.randint(0,800)
+alienY=random.randint(0,150)
+
+
 def spaceship(x,y):
   screen.blit(spaceshipIMG,(x,y))
+
+def aliens(alienX,alienY):
+    screen.blit(alienIMG,(alienX,alienY))
+
 
 # infinite loop for game
 running = True
@@ -29,6 +39,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    #Aliens movement
+
+
+
+    #Movement Keys pressed
     if event.type==pygame.KEYDOWN:
         if event.key==pygame.K_LEFT:
             print("LEFT arrow pressed")
@@ -49,7 +64,7 @@ while running:
             Xchange=0
             Ychange=0
 
-
+    #Spaceship Boundaries
     screen.fill((20,20,20))
     if Xchange>0:
         if spaceshipX<=735.7:
@@ -63,6 +78,8 @@ while running:
     if Ychange<0:
         if spaceshipY >350:
             spaceshipY += Ychange
+
     spaceship(spaceshipX,spaceshipY)
+    aliens(alienX,alienY)
     pygame.display.update()
 
