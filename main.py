@@ -23,6 +23,7 @@ Ychange=0
 alienIMG=pygame.image.load('images/Alien.png')
 alienX=random.randint(0,800)
 alienY=random.randint(0,150)
+lr=0.3
 
 
 def spaceship(x,y):
@@ -40,7 +41,14 @@ while running:
             running = False
 
     #Aliens movement
-
+    if alienX>736:
+        lr=-0.3
+        alienY+=15
+    elif alienX<0:
+        lr=0.3
+        alienY+=15
+    alienX+=lr
+    print(lr)
 
 
     #Movement Keys pressed
