@@ -20,30 +20,26 @@ Xchange=0
 Ychange=0
 
 #Aliens
-class Aliens:
-   alienIMG=pygame.image.load('images/Alien.png')
-   alienX=random.randint(0,800)
-   alienY=random.randint(0,150)
-   lr=0.5
-
+alienIMG=[]
+alienX=[]
+alienY=[]
+lr = []
+num_of_aliens=6
+for i in range (num_of_aliens):
+    alienIMG.append(pygame.image.load('images/Alien.png'))
+    alienX.append(random.randint(0,800))
+    alienY.append(random.randint(0,150))
+    lr.append(random.randint(2,6)/10)
+    rand = random.randint(1, 2)
+    if rand % 2 == 0:
+        lr[i] *= -1
 
 def spaceship(x,y):
   screen.blit(spaceshipIMG,(x,y))
 
-def aliens(alienX,alienY,alienIMG):
-    screen.blit(alienIMG,(alienX,alienY))
+def aliens(alienX,alienY,i):
 
-def alienMovement(alienX,alienY,lr):
-    if alienX>736:
-        lr*=-1
-        alienY+=30
-    elif alienX<0:
-        lr*=-1
-        alienY+=30
-    alienX+=lr
-    if alienY>600:
-        alienY=-30
-
+     screen.blit(alienIMG[i],(alienX,alienY))
 
 
 # infinite loop for game
@@ -54,7 +50,16 @@ while running:
             running = False
 
     #Aliens movement
-    alienMovement()
+    for i in range (num_of_aliens):
+        print(alienY)
+        alienX[i] += lr[i]
+        if alienX[i]<=0:
+            alienY[i] += 15
+            lr[i]*=-1
+
+        elif alienX[i]>=736:
+            alienY[i] += 15
+            lr[i] *=-1
 
 
     #Movement Keys pressed
@@ -94,8 +99,8 @@ while running:
             spaceshipY += Ychange
 
     spaceship(spaceshipX,spaceshipY)
+    for i in range (num_of_aliens):
+      aliens(alienX[i], alienY[i], i)
 
-    aliens(alienX,alienY)
-    aliens(alienX, alienY)
     pygame.display.update()
 
